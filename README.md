@@ -126,3 +126,33 @@ Cloud Run function (`task-event-subscriber`) is triggered by Pub/Sub topic `task
   - `Gemini output: {...}`
 
 These logs are visible in **Cloud Run → task-event-subscriber → Logs / Logs Explorer** and are used as evidence for the assessment.
+
+### Example logs / Gemini evidence
+
+Below screenshots (from Logs Explorer) demonstrate the end-to-end flow:
+
+1. **Received event log**  
+   The subscriber logs the decoded Pub/Sub message:
+
+   ```text
+   Received event: {"event_type": "task.created", "task_id": "TEST-123", "timestamp": "2025-11-16T12:30:00Z", "data": {"title": "Manual Pub/Sub test", "description": "Testing Cloud Run + Gemini via gcloud.", "priority": "high"}}
+   ```
+
+   This confirms that the Cloud Run function successfully received a `task.created` event from the `task-events` topic and parsed the full schema (task id, timestamp, title, description, priority).
+
+   _Screenshot placeholder:_
+
+   `![Received event log](./docs/received-event-log.png)`
+
+2. **Gemini output log**  
+   After building a prompt from the task data, the function calls Gemini 2.5 Flash and logs the raw response:
+
+   ```text
+   Gemini output: {"candidates": [{"content": {"role": "model"}, "finishReason": "MAX_TOKENS", "index": 0}], "usageMetadata": {"promptTokenCount": 58, "totalTokenCount": 313, "promptTokensDetails": [{"modality": "TEXT", "tokenCount": 58}], "thoughtsTokenCount": 255}, "modelVersion": "gemini-2.5-flash", "responseId": "..."}
+   ```
+
+   The `candidates[0].content` text (not fully shown here) contains the generated one-sentence summary, 3–6 suggested sub-tasks, and a category (Bug Fix / Feature / DevOps / Documentation) according to the prompt. The `modelVersion` field confirms the use of `gemini-2.5-flash`.
+
+   _Screenshot placeholder:_
+
+   `![Gemini output log](./docs/gemini-output-log.png)`
