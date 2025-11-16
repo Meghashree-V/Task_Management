@@ -102,6 +102,7 @@ On every push to `main`:
 4. Deploy the image to Cloud Run service `task-api`.
 
 ## Cloud Function + Gemini
+![Image](https://github.com/user-attachments/assets/f83fe070-df4e-4ba3-baa8-9b7a12d905dd)
 
 Cloud Run function (`task-event-subscriber`) is triggered by Pub/Sub topic `task-events`.
 
