@@ -63,8 +63,8 @@ $env:PUBSUB_TOPIC   = "task-events"
 uvicorn main:app --reload
 ```
 
-- Swagger UI: http://127.0.0.1:8000/docs
-- Health: http://127.0.0.1:8000/health
+- Swagger UI: [http://127.0.0.1:8000/docs](https://task-api-297638120012.asia-south2.run.app/docs)
+- Health: [http://127.0.0.1:8000/health](https://task-api-297638120012.asia-south2.run.app/health)
 
 ## GCP Resources
 
