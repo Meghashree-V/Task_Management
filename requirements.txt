@@ -1,0 +1,4 @@
+google-cloud-pubsub>=2.18.4
+fastapi
+uvicorn
+pydantic
