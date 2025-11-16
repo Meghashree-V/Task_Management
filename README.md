@@ -102,7 +102,6 @@ On every push to `main`:
 4. Deploy the image to Cloud Run service `task-api`.
 
 ## Cloud Function + Gemini
-![Image](https://github.com/user-attachments/assets/f83fe070-df4e-4ba3-baa8-9b7a12d905dd)
 
 Cloud Run function (`task-event-subscriber`) is triggered by Pub/Sub topic `task-events`.
 
@@ -127,11 +126,14 @@ Cloud Run function (`task-event-subscriber`) is triggered by Pub/Sub topic `task
   - `Gemini output: {...}`
 
 These logs are visible in **Cloud Run → task-event-subscriber → Logs / Logs Explorer** and are used as evidence for the assessment.
-
 ### Example logs / Gemini evidence
 
 Below screenshots (from Logs Explorer) demonstrate the end-to-end flow:
-
+![Image](https://github.com/user-attachments/assets/894fac5a-d11e-4d62-958f-4b926d1d0a8f)
+![Image](https://github.com/user-attachments/assets/66f2f87a-f9ec-48cd-ad2b-0962e8b32092)
+![Image](https://github.com/user-attachments/assets/d6e21372-d48d-4bf1-ab82-4ea39d267947)
+![Image](https://github.com/user-attachments/assets/2d682350-dc80-47f0-b431-b0a1daefba67)
+![Image](https://github.com/user-attachments/assets/396c56f5-254e-4cdf-95dd-cb4c6ae74db9)
 1. **Received event log**  
    The subscriber logs the decoded Pub/Sub message:
 
@@ -141,9 +143,6 @@ Below screenshots (from Logs Explorer) demonstrate the end-to-end flow:
 
    This confirms that the Cloud Run function successfully received a `task.created` event from the `task-events` topic and parsed the full schema (task id, timestamp, title, description, priority).
 
-   _Screenshot placeholder:_
-
-   `![Received event log](./docs/received-event-log.png)`
 
 2. **Gemini output log**  
    After building a prompt from the task data, the function calls Gemini 2.5 Flash and logs the raw response:
@@ -154,6 +153,3 @@ Below screenshots (from Logs Explorer) demonstrate the end-to-end flow:
 
    The `candidates[0].content` text (not fully shown here) contains the generated one-sentence summary, 3–6 suggested sub-tasks, and a category (Bug Fix / Feature / DevOps / Documentation) according to the prompt. The `modelVersion` field confirms the use of `gemini-2.5-flash`.
 
-   _Screenshot placeholder:_
-
-   `![Gemini output log](./docs/gemini-output-log.png)`
